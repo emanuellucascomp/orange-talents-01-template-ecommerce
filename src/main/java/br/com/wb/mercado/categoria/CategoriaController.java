@@ -1,8 +1,7 @@
-package br.com.wb.mercado.usuario;
+package br.com.wb.mercado.categoria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -12,19 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class UsuarioController {
+@RequestMapping("/api/v1/categorias")
+public class CategoriaController {
 	
 	@PersistenceContext
 	private EntityManager manager;
 	
 	@PostMapping
-	@Transactional
-	public ResponseEntity<?> cadastrar(@RequestBody @Valid UsuarioForm usuarioForm){
-		Usuario usuario = usuarioForm.toModel();
-		manager.persist(usuario);
+	public ResponseEntity<?> cadastrar(@RequestBody @Valid CategoriaForm categoriaForm){
+		Categoria categoria = categoriaForm.toModel();
+		manager.persist(categoria);
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().build();		
 	}
 
 }
