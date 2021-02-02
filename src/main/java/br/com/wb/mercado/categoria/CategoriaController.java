@@ -2,6 +2,7 @@ package br.com.wb.mercado.categoria;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,9 @@ public class CategoriaController {
 	private EntityManager manager;
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<?> cadastrar(@RequestBody @Valid CategoriaForm categoriaForm){
-		Categoria categoria = categoriaForm.toModel();
+		Categoria categoria = categoriaForm.toModel(manager);
 		manager.persist(categoria);
 		
 		return ResponseEntity.ok().build();		
