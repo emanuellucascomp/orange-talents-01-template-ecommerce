@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import br.com.wb.mercado.usuario.Usuario;
 import com.sun.istack.NotNull;
 
 import br.com.wb.mercado.categoria.Categoria;
@@ -37,14 +38,15 @@ public class ProdutoForm {
 		this.caracteristicas = caracteristicas;
 	}
 
-	public Produto toModel(EntityManager manager) {
+	public Produto toModel(Long usuarioLogadoId, EntityManager manager) {
 		Categoria categoria = manager.find(Categoria.class, categoriaId);
+		Usuario logado = manager.find(Usuario.class, usuarioLogadoId);
 		List<Caracteristica> caracteristicasAdicionadas = new ArrayList<>();
 		caracteristicas.forEach(caracteristica -> {
 			caracteristicasAdicionadas.add(caracteristica.toModel());
 		});
 		
-		return new Produto(nome, valor, quantidadeDisponivel, descricao, categoria, caracteristicasAdicionadas);
+		return new Produto(nome, valor, quantidadeDisponivel, descricao, categoria, caracteristicasAdicionadas, logado);
 	}
 	
 }

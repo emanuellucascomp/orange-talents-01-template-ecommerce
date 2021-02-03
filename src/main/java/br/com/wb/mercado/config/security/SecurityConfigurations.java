@@ -44,10 +44,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.POST , "/api/v1/auth").permitAll()
+				.antMatchers("/").permitAll()
+				.antMatchers("/h2-console/**").permitAll()
 				.anyRequest().authenticated()
 				.and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().addFilterBefore(new AutenticacaoTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+		http.headers().frameOptions().disable();
 	}
 	
 	//Configuracoes de recursos estaticos

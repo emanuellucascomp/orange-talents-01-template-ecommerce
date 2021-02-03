@@ -11,6 +11,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import br.com.wb.mercado.categoria.Categoria;
+import br.com.wb.mercado.usuario.Usuario;
 
 @Entity
 public class Produto {
@@ -26,16 +27,19 @@ public class Produto {
 	private String descricao;
 	@ManyToOne
 	private Categoria categoria;
+	@ManyToOne
+	private Usuario criador;
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 	
 	public Produto(@NotBlank String nome, @Positive BigDecimal valor, @Positive int quantidadeDisponivel,
-			@NotBlank @Size(max = 1000) String descricao, Categoria categoria, List<Caracteristica> caracteristicas) {
+			@NotBlank @Size(max = 1000) String descricao, Categoria categoria, List<Caracteristica> caracteristicas, Usuario usuario) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidadeDisponivel = quantidadeDisponivel;
 		this.descricao = descricao;
 		this.categoria = categoria;
 		this.caracteristicas = caracteristicas;
+		this.criador = usuario;
 	}
 
 	@Deprecated
