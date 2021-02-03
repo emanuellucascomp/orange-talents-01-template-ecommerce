@@ -18,6 +18,4 @@ public class CaracteristicaForm {
 	public Caracteristica toModel() {
 		return new Caracteristica(nome, valor);
 	}
-	
-
 }

@@ -27,17 +27,16 @@ public class ProdutoForm {
 	private Long categoriaId;
 	@NotNull @Size(min = 3)
 	private List<CaracteristicaForm> caracteristicas;
-	
-	public ProdutoForm(@NotBlank String nome, @Positive BigDecimal valor, @Positive int quantidadeDisponivel,
-			@NotBlank @Size(max = 1000) String descricao, Long categoriaId) {
-		super();
+
+	public ProdutoForm(@NotBlank String nome, @Positive BigDecimal valor, @Positive int quantidadeDisponivel, @NotBlank @Size(max = 1000) String descricao, Long categoriaId, @Size(min = 3) List<CaracteristicaForm> caracteristicas) {
 		this.nome = nome;
 		this.valor = valor;
 		this.quantidadeDisponivel = quantidadeDisponivel;
 		this.descricao = descricao;
 		this.categoriaId = categoriaId;
+		this.caracteristicas = caracteristicas;
 	}
-	
+
 	public Produto toModel(EntityManager manager) {
 		Categoria categoria = manager.find(Categoria.class, categoriaId);
 		List<Caracteristica> caracteristicasAdicionadas = new ArrayList<>();

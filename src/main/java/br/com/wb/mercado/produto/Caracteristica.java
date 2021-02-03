@@ -23,4 +23,9 @@ public class Caracteristica {
 		this.valor = valor;
 	}
 
+	@Deprecated
+	public Caracteristica(){
+
+	}
+
 }
