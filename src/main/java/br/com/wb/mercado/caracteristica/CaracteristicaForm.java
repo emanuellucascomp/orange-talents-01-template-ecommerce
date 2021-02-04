@@ -1,4 +1,4 @@
-package br.com.wb.mercado.produto;
+package br.com.wb.mercado.caracteristica;
 
 import javax.validation.constraints.NotBlank;
 

@@ -1,14 +1,16 @@
 package br.com.wb.mercado.produto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import br.com.wb.mercado.caracteristica.Caracteristica;
+import br.com.wb.mercado.caracteristica.CaracteristicaForm;
 import br.com.wb.mercado.usuario.Usuario;
 import com.sun.istack.NotNull;
 
@@ -41,10 +43,7 @@ public class ProdutoForm {
 	public Produto toModel(Long usuarioLogadoId, EntityManager manager) {
 		Categoria categoria = manager.find(Categoria.class, categoriaId);
 		Usuario logado = manager.find(Usuario.class, usuarioLogadoId);
-		List<Caracteristica> caracteristicasAdicionadas = new ArrayList<>();
-		caracteristicas.forEach(caracteristica -> {
-			caracteristicasAdicionadas.add(caracteristica.toModel());
-		});
+		List<Caracteristica> caracteristicasAdicionadas = caracteristicas.stream().map(CaracteristicaForm::toModel).collect(Collectors.toList());
 		
 		return new Produto(nome, valor, quantidadeDisponivel, descricao, categoria, caracteristicasAdicionadas, logado);
 	}
