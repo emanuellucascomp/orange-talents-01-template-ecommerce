@@ -11,6 +11,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import br.com.wb.mercado.categoria.Categoria;
+import br.com.wb.mercado.imagem.Imagem;
 import br.com.wb.mercado.usuario.Usuario;
 
 @Entity
@@ -22,8 +23,10 @@ public class Produto {
 	private String nome;
 	private BigDecimal valor;
 	private int quantidadeDisponivel;
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Caracteristica> caracteristicas = new ArrayList<>();
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Imagem> imagens = new ArrayList<>();
 	private String descricao;
 	@ManyToOne
 	private Categoria categoria;
@@ -45,5 +48,9 @@ public class Produto {
 	@Deprecated
 	public Produto(){
 
+	}
+
+	public Usuario getCriador(){
+		return criador;
 	}
 }
