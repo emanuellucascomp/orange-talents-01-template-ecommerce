@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class OpiniaoController {
 	private UsuarioRepository usuarioRepository;
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<?> cadastrar(@RequestBody @Valid OpiniaoForm opiniaoForm){
 		Object logado = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(logado instanceof UserDetails){

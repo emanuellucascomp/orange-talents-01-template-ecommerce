@@ -1,6 +1,9 @@
 package br.com.wb.mercado.opiniao;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -13,6 +16,8 @@ import br.com.wb.mercado.usuario.Usuario;
 @Entity
 public class Opiniao {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private int nota;
 	private String titulo;
