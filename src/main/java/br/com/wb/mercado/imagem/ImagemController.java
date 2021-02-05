@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/imagem")
+@RequestMapping("/api/v1/imagens")
 public class ImagemController {
 
     @Autowired
